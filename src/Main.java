@@ -3,22 +3,19 @@ public class Main {
 
     public static void main (String args[]){
 
+        int vertices = 10000;
 
-        List list = new List();
-        for(int i = 0; i < 10; i++){
-            list.append(i);
-        }
+        Graph graph = new Graph(vertices);
+        Timer timer = new Timer();
+        timer.start();
+        graph.generate(0.1);
+        timer.stop();
+        timer.print();
+        System.out.print("\n");
 
-        list.shuffle();
+        //graph.displayList();
 
-        Graph graph = new Graph(10);
-        list.print();
-        graph.addEdge(list.index(0), list.index(list.size-1));
-        for(int i = 0; i < 9; i++){
-            graph.addEdge(list.index(i), list.index(i+1));
-        }
-
-        graph.displayList();
+        System.out.println(graph.density());
 
     }
 
