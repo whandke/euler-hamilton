@@ -2,7 +2,7 @@ public class Stack {
     public Node head;
     public int size;
 
-    public void Stack(){
+    public Stack(){
         this.size = 0;
         this. head = null;
     }
