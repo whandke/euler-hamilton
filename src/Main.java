@@ -3,19 +3,46 @@ public class Main {
 
     public static void main (String args[]){
 
-        int vertices = 10000;
+        int vertices = 5000;
 
         Graph graph = new Graph(vertices);
+
+        graph.generate(0.6);
+
+        List[] list = graph.copyList();
+
+        System.out.println("Obliczanie cyklu Eulera...");
+
         Timer timer = new Timer();
+
+
         timer.start();
-        graph.generate(0.1);
+        Algorithms.euler(list);
         timer.stop();
+        System.out.print("Czas obliczen: ");
         timer.print();
-        System.out.print("\n");
 
-        //graph.displayList();
+        timer.start();
+        boolean abc = Algorithms.hamiltonSingle(graph.copyList());
+        timer.stop();
+        System.out.print("\nWystapienie cyklu Hamiltona: ");
+        System.out.print(abc);
+        System.out.print("\nCzas obliczen: ");
+        timer.print();
 
-        System.out.println(graph.density());
+        /*
+
+        timer.start();
+        int result = Algorithms.hamiltonAll(graph.copyList());
+        timer.stop();
+        System.out.print("\nIlosc cykli Hamiltona: ");
+        System.out.print(result);
+        System.out.print("\nCzas obliczen: ");
+        timer.print();
+
+        */
+
+
 
     }
 

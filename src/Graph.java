@@ -44,7 +44,7 @@ public class Graph {
     }
 
     public void generate(double density){
-        int first, second, third;
+        int first, second = 0, third = 0;
         Random generator = new Random();
         List list = new List();
 
@@ -63,18 +63,44 @@ public class Graph {
 
         //----- Dodawanie gęstości
 
-        while(density() < density){
-            first = generator.nextInt(vertices -1);
+        int counter = 1000;
+
+        while(density() < density && counter > 0){
+
+
+
+            first = generator.nextInt(vertices);
+            counter++;
             do {
-                second = generator.nextInt(vertices -1);
-            } while(this.list[first].find(second) && this.list[second].find(first));
+                if(counter == 0) break;
+                second = generator.nextInt(vertices);
+                counter--;
+            } while(this.list[first].find(second) || this.list[second].find(first) || first == second);
+            counter++;
             do {
-                third = generator.nextInt(vertices -1);
-            } while(this.list[second].find(third) && this.list[third].find(first) && this.list[third].find(second) && this.list[first].find(third));
-            addEdge(first, second);
-            addEdge(second, third);
-            addEdge(third, first);
+                if(counter == 0) break;
+                third = generator.nextInt(vertices);
+                counter--;
+            } while(this.list[second].find(third) || this.list[third].find(first) || this.list[third].find(second) || this.list[first].find(third) || second == third || first == third);
+            if(counter > 0){
+                addEdge(first, second);
+                addEdge(second, third);
+                addEdge(third, first);
+            }
         }
+    }
+
+    public List[] copyList(){
+
+        List[] resultList = new List[vertices];
+        for(int i = 0; i < vertices; i++) {
+            resultList[i] = new List();
+            for(int j = 0; j < list[i].size; j++){
+                int x = list[i].index(j);
+                resultList[i].append(x);
+            }
+        }
+        return resultList;
     }
 
 }

@@ -1,8 +1,5 @@
 import java.util.Random;
 
-/**
- * Created by Wojciech Handke on 24.04.2017.
- */
 public class List extends Stack {
 
     public void shuffle(){
@@ -101,9 +98,13 @@ public class List extends Stack {
     }
 
     private void append(Node node, int n){
-        if(node.getNext() == null)
-            node.setNext(new Node(n));
-        else append(node.getNext(), n);
+        while(true){
+            if(node.getNext() == null){
+                node.setNext(new Node(n));
+                return;
+            }
+            else node = node.getNext();
+        }
     }
 
     public void append(int n){

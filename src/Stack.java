@@ -7,6 +7,10 @@ public class Stack {
         this. head = null;
     }
 
+    public int first(){
+        return head.getKey();
+    }
+
     public int size(){
         return size;
     }
@@ -32,10 +36,13 @@ public class Stack {
 
 
     private void print(Node node){
-        System.out.print(node.getKey());
-        System.out.print(" ");
-        if(node.getNext() != null)
-            print(node.getNext());
+        while(true){
+            System.out.print(node.getKey());
+            System.out.print(" ");
+            if(node.getNext() == null)
+                return;
+            node = node.getNext();
+        }
     }
 
     public void print(){
